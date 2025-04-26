@@ -7,71 +7,67 @@
     body {
       margin: 0;
       padding: 0;
-      background: #f8e1f4;
+      background: linear-gradient(135deg, #fbe4f0, #ffe5ec);
       font-family: 'Great Vibes', cursive, 'Poppins', sans-serif;
       color: #5e2a7e;
       text-align: center;
-      overflow: hidden;
-      height: 100vh;
-      background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-      background-size: cover;
+      overflow-x: hidden;
+      background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
     }
 
     .scroll {
-      margin: 80px auto 0;
-      padding: 60px 40px;
-      width: 80%;
+      margin: 60px auto;
+      padding: 40px 30px;
+      width: 90%;
       max-width: 700px;
-      background: #fff7f0;
-      border: 15px solid #d4af7f;
-      border-radius: 20px;
-      box-shadow: 0 0 40px #f9c5d1, 0 0 80px #f8bbd0;
-      animation: rollDown 2s ease;
+      background: rgba(255, 255, 255, 0.9);
+      border: 15px solid #f7c1da;
+      border-radius: 30px;
+      box-shadow: 0 0 40px #ff99cc, 0 0 80px #ffb6b9;
+      animation: floatIn 2s ease;
       position: relative;
     }
 
-    @keyframes rollDown {
-      0% {
-        transform: scaleY(0.1) translateY(-500px);
-        opacity: 0;
-      }
-      100% {
-        transform: scaleY(1) translateY(0);
-        opacity: 1;
-      }
+    @keyframes floatIn {
+      0% { transform: scale(0.5) rotate(-30deg); opacity: 0; }
+      100% { transform: scale(1) rotate(0); opacity: 1; }
     }
 
     h1 {
-      font-size: 3em;
+      font-size: 3.5em;
       margin-bottom: 20px;
-      color: #d16ba5;
-      text-shadow: 1px 1px 8px #fff;
+      background: linear-gradient(90deg, #ff6ec4, #7873f5);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: glitter 2s infinite alternate;
+    }
+
+    @keyframes glitter {
+      0% { text-shadow: 0 0 10px #f48fb1, 0 0 20px #ff6ec4; }
+      100% { text-shadow: 0 0 20px #ff6ec4, 0 0 30px #f48fb1; }
     }
 
     p {
-      font-size: 1.6em;
+      font-size: 1.7em;
       color: #70327e;
     }
 
     #apologyButton {
       margin-top: 40px;
-      padding: 15px 35px;
+      padding: 15px 40px;
       font-size: 1.5em;
-      background: linear-gradient(45deg, #ff85a2, #f9a1bc);
+      background: linear-gradient(45deg, #f77062, #fe5196);
       border: none;
       border-radius: 50px;
       color: white;
-      cursor: not-allowed;
-      opacity: 0.6;
-      box-shadow: 0 0 20px #f48fb1;
-      transition: 0.5s;
-    }
-
-    #apologyButton.enabled {
       cursor: pointer;
       opacity: 1;
-      background: linear-gradient(45deg, #ff4081, #ff80ab);
-      box-shadow: 0 0 25px #ff4081, 0 0 40px #ff80ab;
+      box-shadow: 0 0 20px #ff85a2;
+      transition: transform 0.4s;
+    }
+
+    #apologyButton:hover {
+      transform: scale(1.1);
     }
 
     #hearts {
@@ -124,51 +120,98 @@
         opacity: 0;
       }
     }
+
+    .footer {
+      margin-top: 60px;
+      font-size: 1em;
+      color: #9b59b6;
+      padding-bottom: 20px;
+    }
+
+    .love-message {
+      margin-top: 30px;
+      font-size: 2em;
+      color: #d16ba5;
+      text-shadow: 0 0 10px #f48fb1;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 10px #ff99cc; }
+      100% { text-shadow: 0 0 20px #ff69b4; }
+    }
+
+    /* Fireworks */
+    .firework {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #ff6ec4;
+      border-radius: 50%;
+      animation: explode 1s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0.5) translateY(0); opacity: 1; }
+      100% { transform: scale(1.5) translateY(-100px); opacity: 0; }
+    }
   </style>
 </head>
 <body>
 
 <div class="scroll">
   <h1>Mon Amour Ashley</h1>
-  <p>My heart belongs to you, my queen, my forever love.</p>
-  <button id="apologyButton" disabled>Click Me at 12:00 a.m.</button>
+  <p>My dearest princess, my heart beats only for you.</p>
+  <button id="apologyButton">Click Me My Love</button>
+
+  <div class="love-message" id="loveMessage" style="display:none;">
+    I Love You Forever, My Princess!
+  </div>
 </div>
 
 <div id="hearts"></div>
 
 <audio id="romanticMusic" src="https://www.bensound.com/bensound-music/bensound-love.mp3" preload="auto"></audio>
 
+<div class="footer">
+  &copy; 2025 Josephine Technologies
+</div>
+
 <script>
-  function enableButtonAtMidnight() {
-    const now = new Date();
-    if (now.getHours() === 0 && now.getMinutes() === 0) {
-      const button = document.getElementById('apologyButton');
-      button.disabled = false;
-      button.classList.add('enabled');
+  const button = document.getElementById('apologyButton');
+  const loveMessage = document.getElementById('loveMessage');
+  const music = document.getElementById('romanticMusic');
+
+  button.addEventListener('click', function() {
+    music.play();
+    
+    setTimeout(() => {
+      alert("Mon Amour Ashley,\n\nPlease forgive my foolish words.\nYou are my treasure, my heartbeat, my everything.\nI can't imagine a life without your smile.\nI love you endlessly, my sweet angel.\nForgive me, and let me continue to love you forever.\n\nForever yours,\n[Your Name]");
+    }, 400);
+
+    loveMessage.style.display = "block";
+
+    for (let i = 0; i < 30; i++) {
+      let heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+      document.getElementById('hearts').appendChild(heart);
     }
-  }
 
-  setInterval(enableButtonAtMidnight, 1000);
-
-  document.getElementById('apologyButton').addEventListener('click', function() {
-    if (!this.disabled) {
-      const music = document.getElementById('romanticMusic');
-      music.play();
-
+    for (let i = 0; i < 50; i++) {
+      let firework = document.createElement('div');
+      firework.className = 'firework';
+      firework.style.left = Math.random() * window.innerWidth + 'px';
+      firework.style.top = Math.random() * window.innerHeight + 'px';
+      firework.style.background = `hsl(${Math.random()*360}, 100%, 70%)`;
+      document.body.appendChild(firework);
       setTimeout(() => {
-        alert("My sweetest Mon Amour Ashley,\n\nI am truly sorry from the bottom of my heart.\nI was foolish to even joke like that.\nYou are my first, my last, my everything.\nYou are not just important to me — YOU ARE MY WORLD.\nI love you endlessly, my princess, and I promise to never hurt you again.\n\nForever yours,\n[Your Name]");
-      }, 400);
-
-      for (let i = 0; i < 30; i++) {
-        let heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
-        document.getElementById('hearts').appendChild(heart);
-      }
+        firework.remove();
+      }, 1000);
     }
   });
 </script>
 
 </body>
-</html>
+  </html>
