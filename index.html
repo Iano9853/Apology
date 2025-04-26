@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mon Amour Ashley</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f8e1f4;
+      font-family: 'Great Vibes', cursive, 'Poppins', sans-serif;
+      color: #5e2a7e;
+      text-align: center;
+      overflow: hidden;
+      height: 100vh;
+      background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+      background-size: cover;
+    }
+
+    .scroll {
+      margin: 80px auto 0;
+      padding: 60px 40px;
+      width: 80%;
+      max-width: 700px;
+      background: #fff7f0;
+      border: 15px solid #d4af7f;
+      border-radius: 20px;
+      box-shadow: 0 0 40px #f9c5d1, 0 0 80px #f8bbd0;
+      animation: rollDown 2s ease;
+      position: relative;
+    }
+
+    @keyframes rollDown {
+      0% {
+        transform: scaleY(0.1) translateY(-500px);
+        opacity: 0;
+      }
+      100% {
+        transform: scaleY(1) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #d16ba5;
+      text-shadow: 1px 1px 8px #fff;
+    }
+
+    p {
+      font-size: 1.6em;
+      color: #70327e;
+    }
+
+    #apologyButton {
+      margin-top: 40px;
+      padding: 15px 35px;
+      font-size: 1.5em;
+      background: linear-gradient(45deg, #ff85a2, #f9a1bc);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      cursor: not-allowed;
+      opacity: 0.6;
+      box-shadow: 0 0 20px #f48fb1;
+      transition: 0.5s;
+    }
+
+    #apologyButton.enabled {
+      cursor: pointer;
+      opacity: 1;
+      background: linear-gradient(45deg, #ff4081, #ff80ab);
+      box-shadow: 0 0 25px #ff4081, 0 0 40px #ff80ab;
+    }
+
+    #hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ffb6b9;
+      transform: rotate(45deg);
+      animation: float 8s infinite ease-in;
+      opacity: 0.6;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ffb6b9;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="scroll">
+  <h1>Mon Amour Ashley</h1>
+  <p>My heart belongs to you, my queen, my forever love.</p>
+  <button id="apologyButton" disabled>Click Me at 12:00 a.m.</button>
+</div>
+
+<div id="hearts"></div>
+
+<audio id="romanticMusic" src="https://www.bensound.com/bensound-music/bensound-love.mp3" preload="auto"></audio>
+
+<script>
+  function enableButtonAtMidnight() {
+    const now = new Date();
+    if (now.getHours() === 0 && now.getMinutes() === 0) {
+      const button = document.getElementById('apologyButton');
+      button.disabled = false;
+      button.classList.add('enabled');
+    }
+  }
+
+  setInterval(enableButtonAtMidnight, 1000);
+
+  document.getElementById('apologyButton').addEventListener('click', function() {
+    if (!this.disabled) {
+      const music = document.getElementById('romanticMusic');
+      music.play();
+
+      setTimeout(() => {
+        alert("My sweetest Mon Amour Ashley,\n\nI am truly sorry from the bottom of my heart.\nI was foolish to even joke like that.\nYou are my first, my last, my everything.\nYou are not just important to me — YOU ARE MY WORLD.\nI love you endlessly, my princess, and I promise to never hurt you again.\n\nForever yours,\n[Your Name]");
+      }, 400);
+
+      for (let i = 0; i < 30; i++) {
+        let heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+        document.getElementById('hearts').appendChild(heart);
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
